@@ -1,0 +1,16 @@
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Claude
+.claude
+
+# Node (only relevant if a local tool is ever installed here)
+node_modules/
+npm-debug.log*

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>Álbum Mundial 2026</title>
+<meta name="description" content="Llevá el control de tus figuritas del álbum del Mundial 2026.">
+<meta name="theme-color" content="#0f1720">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CuentaFigus">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="app-header">
+  <h1>Álbum Mundial 2026</h1>
+  <div class="global-stats">
+    <div class="stat">
+      <span class="stat-value" id="stat-obtained">0</span>
+      <span class="stat-label" id="stat-obtained-label">obtenidas</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value" id="stat-repeated">0</span>
+      <span class="stat-label">repetidas para canje</span>
+    </div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+</header>
+
+<main id="accordion-container"></main>
+
+<footer class="app-footer">
+  <div class="footer-actions">
+    <button id="import-btn" type="button">Importar álbum</button>
+    <button id="export-missing-btn" type="button">Exportar faltantes</button>
+    <button id="export-repeated-btn" type="button">Exportar repes</button>
+    <button id="reset-btn" type="button">Reiniciar álbum</button>
+  </div>
+</footer>
+
+<div id="modal-overlay" class="modal-overlay" hidden>
+  <div class="modal">
+    <h2 id="modal-title"></h2>
+    <p id="modal-desc" class="modal-desc"></p>
+    <textarea id="modal-textarea" rows="10"></textarea>
+    <div class="modal-actions">
+      <button id="modal-secondary-btn" type="button" class="modal-btn-secondary"></button>
+      <button id="modal-primary-btn" type="button" class="modal-btn-primary"></button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

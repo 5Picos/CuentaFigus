@@ -1,0 +1,299 @@
+:root {
+  --bg: #0f1720;
+  --panel: #1a2530;
+  --panel-alt: #202e3c;
+  --border: #2c3b4a;
+  --text: #e8eef4;
+  --text-dim: #8fa3b3;
+  --empty: #2c3b4a;
+  --obtained: #2fae60;
+  --obtained-dark: #1f7d45;
+  --repeated: #e08a2c;
+  --repeated-dark: #a8621a;
+  --special: #4a8fe0;
+  --accent: #e0c02c;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--panel);
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.app-header h1 {
+  margin: 0 0 10px;
+  font-size: 19px;
+  text-align: center;
+}
+
+.global-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 10px;
+}
+
+.stat { text-align: center; }
+.stat-value { display: block; font-size: 20px; font-weight: 700; }
+.stat-label { display: block; font-size: 11px; color: var(--text-dim); }
+
+.progress-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--empty);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--obtained-dark), var(--obtained));
+  transition: width 0.3s ease;
+}
+
+main { max-width: 640px; margin: 0 auto; padding: 10px 8px 40px; }
+
+.accordion-item {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.accordion-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.accordion-header .flag { font-size: 22px; line-height: 1; }
+.accordion-header .name { flex: 1; font-size: 15px; font-weight: 600; }
+
+.accordion-header .mini-progress {
+  font-size: 12px;
+  color: var(--text-dim);
+  min-width: 42px;
+  text-align: right;
+}
+
+.accordion-header .chevron {
+  font-size: 12px;
+  color: var(--text-dim);
+  transition: transform 0.2s ease;
+}
+
+.accordion-item.open .chevron { transform: rotate(180deg); }
+
+.accordion-body {
+  display: none;
+  padding: 6px 14px 16px;
+}
+
+.accordion-item.open .accordion-body { display: block; }
+
+.sticker-block {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  max-width: 280px;
+  margin: 10px auto;
+}
+
+.sticker-block.fwc-block {
+  grid-template-columns: repeat(5, 1fr);
+  max-width: 340px;
+}
+
+.block-gap { height: 4px; }
+
+.sticker {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  background: var(--empty);
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dim);
+  cursor: pointer;
+  overflow: hidden;
+  touch-action: manipulation;
+}
+
+.sticker::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 0%;
+  background: rgba(255,255,255,0.18);
+  transition: none;
+}
+
+.sticker.pressing::before {
+  width: 100%;
+  transition: width 0.45s linear;
+}
+
+.sticker.special {
+  border-color: var(--special);
+  color: var(--special);
+}
+
+.sticker.state-obtained {
+  background: var(--obtained-dark);
+  color: #fff;
+  border-color: var(--obtained);
+}
+
+.sticker.state-obtained.special {
+  border-color: var(--accent);
+}
+
+.sticker.state-repeated {
+  background: var(--repeated-dark);
+  color: #fff;
+  border-color: var(--repeated);
+}
+
+.sticker.state-repeated.special {
+  border-color: var(--accent);
+}
+
+.sticker .badge {
+  position: absolute;
+  bottom: 2px;
+  right: 3px;
+  font-size: 9px;
+  font-weight: 700;
+  background: rgba(0,0,0,0.35);
+  border-radius: 4px;
+  padding: 1px 3px;
+  line-height: 1.2;
+}
+
+.sticker .type-icon {
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  font-size: 9px;
+  opacity: 0.85;
+}
+
+.app-footer {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 8px 30px;
+  text-align: center;
+}
+
+.footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.footer-actions button {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.footer-actions button:active { background: var(--panel-alt); }
+
+#reset-btn { color: var(--repeated); border-color: var(--repeated-dark); }
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 100;
+}
+
+.modal-overlay[hidden] { display: none; }
+
+.modal {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.modal h2 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.modal-desc {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.modal textarea {
+  width: 100%;
+  resize: vertical;
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 10px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.modal-actions button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.modal-btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+
+.modal-btn-primary {
+  background: var(--obtained-dark);
+  border: 1px solid var(--obtained);
+  color: #fff;
+}
