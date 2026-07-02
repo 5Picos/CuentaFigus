@@ -375,20 +375,23 @@ function buildAccordionItem({ flag, name, body, totalCount }) {
   return item;
 }
 
-// Interpreta un mensaje pegado con formato "Me faltan" o "Repetidas"
-// (de esta app o de la app compatible). Devuelve { mode, ids } o null
-// si no se reconoce ningún encabezado válido.
+// Interpreta un mensaje pegado que puede traer una sección "Me faltan",
+// una sección "Repetidas", o ambas juntas en un solo mensaje (de esta app
+// o de la app compatible). Devuelve { faltantes, repetidas } con arrays de
+// ids (o null si esa sección no apareció), o null si no se reconoce ningún
+// encabezado válido.
 function parsePastedList(text) {
   if (!text || !text.trim()) return null;
   const lines = text.split(/\r?\n/);
   let mode = null;
-  const ids = [];
+  const result = { faltantes: null, repetidas: null };
 
   for (const rawLine of lines) {
     const line = rawLine.trim();
     if (!line) continue;
     if (/^me faltan$/i.test(line)) { mode = "faltantes"; continue; }
     if (/^repetidas$/i.test(line)) { mode = "repetidas"; continue; }
+    if (!mode) continue;
 
     const colonIdx = line.indexOf(":");
     if (colonIdx === -1) continue;
@@ -406,6 +409,7 @@ function parsePastedList(text) {
       .map((m) => parseInt(m[0], 10));
     if (!numbers.length) continue;
 
+    const ids = result[mode] || (result[mode] = []);
     if (code === "FWC") {
       numbers.forEach((n) => ids.push(`FWC-${n}`));
       continue;
@@ -415,8 +419,8 @@ function parsePastedList(text) {
     numbers.forEach((n) => ids.push(`${ourCode}-${n}`));
   }
 
-  if (!mode) return null;
-  return { mode, ids };
+  if (!result.faltantes && !result.repetidas) return null;
+  return result;
 }
 
 // Genera un mensaje de texto ("faltantes" o "repetidas") compatible con
@@ -518,7 +522,7 @@ function setupFooterActions() {
   document.getElementById("import-btn").addEventListener("click", () => {
     openModal({
       title: "Importar álbum",
-      desc: 'Pegá acá el mensaje de "Me faltan" o "Repetidas" (de esta app o de otra compatible) para actualizar tu álbum.',
+      desc: 'Pegá acá el mensaje de "Me faltan", de "Repetidas", o ambos juntos en un solo mensaje (de esta app o de otra compatible) para actualizar tu álbum.',
       value: "",
       readonly: false,
       primaryLabel: "Importar",
@@ -529,10 +533,8 @@ function setupFooterActions() {
           alert('No se reconoció el formato del mensaje. Pegá el texto completo de "Me faltan" o "Repetidas".');
           return;
         }
-        const applied = parsed.mode === "faltantes"
-          ? importFaltantes(parsed.ids)
-          : importRepetidas(parsed.ids);
-        if (!applied) return;
+        if (parsed.faltantes && !importFaltantes(parsed.faltantes)) return;
+        if (parsed.repetidas) importRepetidas(parsed.repetidas);
         render();
         closeModal();
       },
