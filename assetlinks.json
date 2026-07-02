@@ -1,8 +1,0 @@
-[{
-      "relation": ["delegate_permission/common.handle_all_urls"],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "io.github.cincopicos.cuentafigus",
-        "sha256_cert_fingerprints": ["69:B7:AE:AB:32:09:2D:ED:FF:A1:57:0E:4E:96:5B:20:63:7E:7D:79:25:BA:8C:67:04:E5:8D:91:7B:B0:BC:63"]
-      }
-    }]
