@@ -6,25 +6,25 @@ const COUNTRIES = [
   { code: "KR", name: "Corea del Sur" },
   { code: "CZ", name: "República Checa" },
   // Grupo B
-  { code: "CH", name: "Suiza" },
   { code: "CA", name: "Canadá" },
   { code: "BA", name: "Bosnia y Herzegovina" },
   { code: "QA", name: "Qatar" },
+  { code: "CH", name: "Suiza" },
   // Grupo C
   { code: "BR", name: "Brasil" },
   { code: "MA", name: "Marruecos" },
-  { code: "SCT", name: "Escocia" },
   { code: "HT", name: "Haití" },
+  { code: "SCT", name: "Escocia" },
   // Grupo D
   { code: "US", name: "Estados Unidos" },
-  { code: "AU", name: "Australia" },
   { code: "PY", name: "Paraguay" },
+  { code: "AU", name: "Australia" },
   { code: "TR", name: "Turquía" },
   // Grupo E
   { code: "DE", name: "Alemania" },
+  { code: "CW", name: "Curazao" },
   { code: "CI", name: "Costa de Marfil" },
   { code: "EC", name: "Ecuador" },
-  { code: "CW", name: "Curazao" },
   // Grupo F
   { code: "NL", name: "Países Bajos" },
   { code: "JP", name: "Japón" },
@@ -38,23 +38,23 @@ const COUNTRIES = [
   // Grupo H
   { code: "ES", name: "España" },
   { code: "CV", name: "Cabo Verde" },
-  { code: "UY", name: "Uruguay" },
   { code: "SA", name: "Arabia Saudita" },
+  { code: "UY", name: "Uruguay" },
   // Grupo I
   { code: "FR", name: "Francia" },
-  { code: "NO", name: "Noruega" },
   { code: "SN", name: "Senegal" },
   { code: "IQ", name: "Irak" },
+  { code: "NO", name: "Noruega" },
   // Grupo J
   { code: "AR", name: "Argentina" },
-  { code: "AT", name: "Austria" },
   { code: "DZ", name: "Argelia" },
+  { code: "AT", name: "Austria" },
   { code: "JO", name: "Jordania" },
   // Grupo K
-  { code: "CO", name: "Colombia" },
   { code: "PT", name: "Portugal" },
   { code: "CD", name: "RD Congo" },
   { code: "UZ", name: "Uzbekistán" },
+  { code: "CO", name: "Colombia" },
   // Grupo L
   { code: "GB", name: "Inglaterra" },
   { code: "HR", name: "Croacia" },
@@ -426,7 +426,7 @@ function parsePastedList(text) {
 // Genera un mensaje de texto ("faltantes" o "repetidas") compatible con
 // el formato de la otra app, a partir del estado actual del álbum.
 function buildExportMessage(kind) {
-  const lines = ["Figuritas App - Lista", "Usa Méx Can 26"];
+  const lines = ["CuentaFigus", "FWC 2026"];
   if (kind === "repetidas") lines.push("");
   lines.push(kind === "faltantes" ? "Me faltan" : "Repetidas");
 
@@ -522,7 +522,7 @@ function setupFooterActions() {
   document.getElementById("import-btn").addEventListener("click", () => {
     openModal({
       title: "Importar álbum",
-      desc: 'Pegá acá el mensaje de "Me faltan", de "Repetidas", o ambos juntos en un solo mensaje (de esta app o de otra compatible) para actualizar tu álbum.',
+      desc: 'Pegá acá el mensaje de "Me faltan", de "Repetidas", o ambos juntos en un solo mensaje (de esta app o de otra compatible como "Figuritas") para actualizar tu álbum.',
       value: "",
       readonly: false,
       primaryLabel: "Importar",
